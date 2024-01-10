@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Edit Post</h1>
-    <form action="/edit-post/{{$post->id}}">
+    <form action="{{route('post.update', compact('post'))}}">
         @csrf
         @method('PUT')
         <input type="text" name="title" value="{{$post->title}}">

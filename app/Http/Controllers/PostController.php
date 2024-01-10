@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class  PostController extends Controller
 {
+//    public function destroy(Post $post){
+//        if(auth()->user()->id === $post['user_id']){
+//            $post->delete();
+//        }
+//        return redirect('/');
+//    }
+
+    //update the post
     public function update(Request $request, Post $post)
     {
         if (auth()->id() !== $post['user_id']) {
@@ -25,14 +33,16 @@ class  PostController extends Controller
         return redirect('/');
     }
 
-    public function show(Post $post)
+    //show edit screen
+    public function show (Post $post)
     {
         if (auth()->id() !== $post['user_id']) {
             return redirect('/');
         }
-        return view('edit-post', ['post' => $post]);
+        return view('home', ['post' => $post]);
     }
 
+    //Create a new post
     public function store(Request $request)
     {
         $validatedData = $request->validate([

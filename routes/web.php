@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $posts = [];
-    if(auth()->check()) {
+    if (auth()->check()) {
         $posts = auth()->user()->usersCoolPosts()->latest()->get();
     }
     return view('home', ['posts' => $posts]);
@@ -29,8 +29,8 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 
-Route::resource('post', postcontroller::class)->only([
-    'store', 'show', 'update'
+Route::resource('post', PostController::class)->only([
+    'store', 'show', 'update', 'destroy'
 ]);
 
 //Route::controller(PostController::class)->group(function () {

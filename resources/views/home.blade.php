@@ -15,7 +15,7 @@
     </form>
     <div style="border: 3px solid black">
         <h2>Create a new post</h2>
-        <form action="/create-post" method="POST">
+        <form action="{{route('post.store', compact('post'))}}" method="POST">
             @csrf
             <input name="title" type="text" placeholder="title">
             <textarea name="body" placeholder="bodycontent..."></textarea>
@@ -29,7 +29,7 @@
             <div style="background-color: gray; padding: 10px; margin: 10px;">
                 <h3>{{$post['title']}}</h3>
                 <p>{{$post['body']}}</p>
-                <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
+                <p><a href="{{route('post.show', compact('post'))}}">Edit</a></p>
                 <form action="/delete-post/{{$post->id}}" method="POST">
                     @csrf
                     @method('DELETE')
