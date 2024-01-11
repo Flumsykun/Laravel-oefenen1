@@ -30,7 +30,7 @@ class  PostController extends Controller
         $validatedData['body'] = strip_tags($validatedData['body']);
 
         $post->update($validatedData);
-        return redirect('/');
+        return redirect()->route('post.show', ['post' => $post]);
     }
 
     //show edit screen
@@ -39,7 +39,18 @@ class  PostController extends Controller
         if (auth()->id() !== $post['user_id']) {
             return redirect('/');
         }
-        return view('home', ['post' => $post]);
+
+        return view('show', compact('post'));
+    }
+
+    //edit
+    public function edit (Post $post)
+    {
+        if (auth()->id() !== $post['user_id']) {
+            return redirect('/');
+        }
+
+        return view('edit-post', compact('post'));
     }
 
     //Create a new post

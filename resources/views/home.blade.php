@@ -15,7 +15,7 @@
     </form>
     <div style="border: 3px solid black">
         <h2>Create a new post</h2>
-        <form action="{{route('post.store', compact('post'))}}" method="POST">
+        <form action="{{route('post.store')}}" method="POST">
             @csrf
             <input name="title" type="text" placeholder="title">
             <textarea name="body" placeholder="bodycontent..."></textarea>
@@ -27,13 +27,13 @@
         <h2>All posts</h2>
         @foreach($posts as $post)
             <div style="background-color: gray; padding: 10px; margin: 10px;">
-                <h3>{{$post['title']}}</h3>
-                <p>{{$post['body']}}</p>
-                <p><a href="{{route('post.show', compact('post'))}}">Edit</a></p>
-                <form action="/delete-post/{{$post->id}}" method="POST">
+                <h3>{{$post['title']}} by {{$post->user->name}}</h3>
+                <p>Created at: {{$post->created_at ? $post->created_at->format('Y-m-d H:i:s') : 'N/A'}}</p>                <p>{{$post['body']}}</p>
+                <p><a href="{{route('post.edit', compact('post'))}}">Edit</a></p>
+                <form action="{{route('post.destroy', compact('post'))}}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button>delete</button>
+                    <button type="submit">delete</button>
                 </form>
             </div>
         @endforeach

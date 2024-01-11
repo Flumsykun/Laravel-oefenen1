@@ -47,4 +47,8 @@ class User extends Authenticatable
         return $this->hasMany(Post::class,'user_id');
     }
 
+    public function getStatusAttribute(): string
+    {
+        return $this->attributes['status'] === 1 ? 'Active' : 'Inactive';
+    }
 }

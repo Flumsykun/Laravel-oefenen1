@@ -22,16 +22,15 @@ Route::get('/', function () {
         $posts = auth()->user()->usersCoolPosts()->latest()->get();
     }
     return view('home', ['posts' => $posts]);
-});
+
+}) ->name('home');
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 
-Route::resource('post', PostController::class)->only([
-    'store', 'show', 'update', 'destroy'
-]);
+Route::resource('post', PostController::class);
 
 //Route::controller(PostController::class)->group(function () {
 //    Route::post(uri: '/create-post', action: 'store')->name('post.store');
