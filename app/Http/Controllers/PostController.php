@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class  PostController extends Controller
 {
-//    public function destroy(Post $post){
-//        if(auth()->user()->id === $post['user_id']){
-//            $post->delete();
-//        }
-//        return redirect('/');
-//    }
+    public function destroy(Post $post){
+        if(auth()->user()->id === $post['user_id']){
+            $post->delete();
+        }
+        return redirect('/');
+    }
 
     //update the post
     public function update(Request $request, Post $post)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -15,20 +16,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//
+//Route::get('/', function () {
+//    $posts = Post::all();
+//    return view('home', ['posts' => $posts]);
+//}) ->name('home');
+// routes/web.php
 
-Route::get('/', function () {
-    $posts = [];
-    if (auth()->check()) {
-        $posts = auth()->user()->usersCoolPosts()->latest()->get();
-    }
-    return view('home', ['posts' => $posts]);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-}) ->name('home');
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
-
 
 Route::resource('post', PostController::class);
 
